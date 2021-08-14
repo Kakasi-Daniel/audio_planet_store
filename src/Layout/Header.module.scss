@@ -1,0 +1,170 @@
+.nav {
+  background-color: #000;
+  height: 100px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+  transition: height .5s ease;
+  .navbar {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.568);
+    .logo {
+      width: 300px;
+    }
+    .navMenu ul{
+        display: flex;
+        list-style: none;
+        & li{
+            margin: 0 20px;
+        }
+        & a{
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Nunito Sans', sans-serif;
+            transition: color .3s ease;
+            font-size: 18px;
+        }
+        & a:hover{
+            color: #d4a064;
+        }
+
+        .active{
+            color: #d4a064;
+        }
+    }
+    .userMenu{
+        display: flex;
+        align-items: center;
+        & > *{
+            margin: 0 10px;
+        }
+
+        .btn{
+            background-color: #fff;
+            text-decoration: none;
+            color: #000;
+            border: none;
+            font-size: 18px;
+            padding: 3px 20px;
+            font-family: 'Nunito Sans', sans-serif;
+            border-radius: 2px;
+            opacity: .88;
+            transition: opacity .3s ease;
+        }
+
+        .btn:hover{
+            opacity: 1;
+        }
+
+        .btnSignup{
+            background-color: #b48550;
+            color: #fff;
+        }
+
+        .cartIcon{
+            position: relative;
+            transition: transform .3s ease;
+        }
+
+        .cartIcon:hover{
+            transform: scale(1.2);
+        }
+
+        .white{
+            color: #fff;
+        }
+
+        .basketall{
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            background-color: #d4a064;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            z-index: 1;
+            border-radius: 50%;
+            font-family: 'Nunito Sans', sans-serif;
+            bottom: -10px;
+            right: -10px;
+        }
+
+        .accountDropdown{
+            position: relative;
+        }
+
+        .account{
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        .account:hover{
+            color: #d4a064;
+        }
+
+
+        .account > *{
+            margin: 0 5px;
+        }
+
+        .accountDropdownMenu{
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            max-height: 0px;
+            overflow: hidden;
+            transition: max-height .3s;
+
+            ul{
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                li{
+                    width: 100%;
+                    text-align: center;
+                }
+                a , button{
+                    text-decoration: none;
+                    background-color: transparent;
+                    border: none;
+                    color: #000;
+                    font-size: 18px;
+                    font-family: 'Nunito Sans', sans-serif;
+                    display: block;
+                    padding: 7px;
+                    cursor: pointer;
+                    width: 100%;
+                }
+
+                a:hover , button:hover{
+                    background-color: #000;
+                    color: #fff;
+                }
+            }
+        }
+
+        .accountDropdown:hover .accountDropdownMenu{
+            max-height: 130px;
+        }
+        
+    }
+  }
+}
+
+.scrolled{
+    height: 50px; 
+}
+
+img {
+  width: 100%;
+}

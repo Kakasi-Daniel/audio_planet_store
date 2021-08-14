@@ -1,0 +1,43 @@
+.footer{
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Nunito Sans', sans-serif;
+    p{
+        margin: 30px;
+    }
+}
+
+.footerSections{
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+}
+
+.logo{
+    margin: 30px;
+}
+
+
+
+.footerSections > *{
+    flex: 1;
+}
+
+.right{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.social{
+    width: fit-content;
+}
+
+.social a{
+    color: #fff;
+    margin: 10px;
+}
+
+.social a:hover{
+    color: #d4a064;
+}

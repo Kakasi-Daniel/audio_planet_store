@@ -1,0 +1,32 @@
+.prodType{
+
+    width: 300px;
+    text-decoration: none;
+    font-family: 'Nunito Sans', sans-serif;
+
+    p{
+        background-color: #a77b4a;
+        color: #fff;
+        position: relative;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 18px;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.486);
+    }
+
+    img{
+        position: absolute;
+        bottom: 60%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        transition: bottom .3s ease,box-shadow .3s ease;
+        
+    }
+}
+
+.prodType:hover img{
+    bottom: 100%;
+    box-shadow: 0px 20px 5px rgba(0, 0, 0, 0.404);
+}

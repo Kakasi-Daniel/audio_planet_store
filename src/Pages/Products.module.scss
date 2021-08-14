@@ -1,0 +1,73 @@
+.productsPage{
+    margin-top: 150px;
+    margin-bottom: 50px;
+    font-family: 'Nunito Sans', sans-serif;
+    display: flex;
+
+
+    .sidebar{
+        width: 200px;
+        .filterSection{
+            margin-bottom: 30px;
+            background-color: rgb(224, 221, 221);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 17px;
+    
+    
+            .filterLabel{
+                margin-bottom: 10px;
+                cursor: pointer;
+                position: relative;
+            }
+    
+            .filterLabel::after{
+                content: '-';
+                font-size: 25px;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+    
+            .filterContent{
+                max-height: 300px;
+                overflow: hidden;
+                transition: max-height .3s ease;
+            }
+    
+            .filterOption{
+                margin-bottom: 5px;
+                label{
+                    cursor: pointer;
+                }
+                input[type="checkbox"]{
+                    margin-right: 5px;
+                    cursor: pointer;
+                }
+            }
+    
+        }
+    }
+
+    
+
+    .filterSection.shrink{
+        
+        .filterLabel::after{
+            content: '+';
+        }
+
+        .filterContent{
+            max-height: 0px;
+        }
+    }
+}
+
+.productsList{
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 0 30px;
+}
