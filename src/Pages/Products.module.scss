@@ -3,6 +3,7 @@
     margin-bottom: 50px;
     font-family: 'Nunito Sans', sans-serif;
     display: flex;
+    position: relative;
 
 
     .sidebar{
@@ -44,6 +45,7 @@
                 input[type="checkbox"]{
                     margin-right: 5px;
                     cursor: pointer;
+                    
                 }
             }
     
@@ -70,4 +72,10 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin: 0 30px;
+}
+
+.loading{
+    width: 100px;
+    height: 100px;
+    margin: auto;
 }

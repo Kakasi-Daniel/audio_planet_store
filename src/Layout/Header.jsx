@@ -11,7 +11,7 @@ import {auth} from '../firebase'
 import { useState } from 'react';
 
 function Header() {
-  const [{ user, basket },] = useContext(globalContext);
+  const [{ user, basketItems },] = useContext(globalContext);
   const [scrolled, setScrolled] = useState('')
   useEffect(() => {
     window.onscroll = e =>{
@@ -100,7 +100,7 @@ function Header() {
           )}
           <Link to="/checkout" className={classes.cartIcon}>
             <ShoppingCartIcon className={classes.white} />
-            {basket.length!==0 && <span className={classes.basketall}>{basket.length}</span>}
+            {basketItems!==0 && <span className={classes.basketall}>{basketItems}</span>}
           </Link>
         </div>
       </Container>

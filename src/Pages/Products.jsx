@@ -1,53 +1,79 @@
 import classes from './Products.module.scss';
 import Container from '../UI/Container';
-import { useState,useEffect } from 'react';
+import { useState, useEffect,useRef} from 'react';
 import Product from '../Components/ProductBox';
-import {getArrayProducts} from '../http';
+import { getArrayProducts } from '../http';
 import arrayShuffle from 'array-shuffle';
-
+import loadingGif from '../assets/loading.gif'
 
 function Products() {
   const [types, setTypes] = useState([]);
   const [brands, setBrands] = useState([]);
-  const [fetchedProducts, setfetchedProducts] = useState([])
+  const [fetchedProducts, setfetchedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const typeRef = useRef()
+  const brandRef = useRef()
+
+  const getParameterByName = (name, url = window.location.href) => {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
   useEffect(() => {
-    getArrayProducts().then(products =>{
-      const shuffledProducts = arrayShuffle(products)
-      setfetchedProducts(shuffledProducts)
-    })
-  }, [])
+    getArrayProducts().then((products) => {
+      const shuffledProducts = arrayShuffle(products);
+      setfetchedProducts(shuffledProducts);
+      setLoading(false)
+    });
+    const brand = getParameterByName('brand')
+    const type = getParameterByName('type')
+    
+    if(brand){
+      brandRef.current.click();
+    }
+    if(type){
+      typeRef.current.click();
+    }
 
-  let DISPLAYED_PRODUCTS = fetchedProducts.length===0 ? [] : [...fetchedProducts]
-  
-  const filter = (method) =>{
-      if(method === 'types'){
-          return function(e){
-              if(types.includes(e.target.value)){
-                  setTypes(prev => {
-                      return prev.filter(type => type !== e.target.value)
-                  })
-              }else{
-                  setTypes(prev=>{
-                      return [...prev,e.target.value]
-                  })
-              }
-          }
-      }
-      if(method === 'brands'){
-          return function(e){
-              if(brands.includes(e.target.value)){
-                  setBrands(prev => {
-                      return prev.filter(type => type !== e.target.value)
-                  })
-              }else{
-                  setBrands(prev=>{
-                      return [...prev,e.target.value]
-                  })
-              }
-          }
-      }
-  }
+
+  }, []);
+
+  let DISPLAYED_PRODUCTS =
+    fetchedProducts.length === 0 ? [] : [...fetchedProducts];
+
+  const filter = (method) => {
+    if (method === 'types') {
+      return function (e) {
+        if (types.includes(e.target.value)) {
+          setTypes((prev) => {
+            return prev.filter((type) => type !== e.target.value);
+          });
+        } else {
+          setTypes((prev) => {
+            return [...prev, e.target.value];
+          });
+        }
+      };
+    }
+    if (method === 'brands') {
+      return function (e) {
+        if (brands.includes(e.target.value)) {
+          setBrands((prev) => {
+            return prev.filter((type) => type !== e.target.value);
+          });
+        } else {
+          setBrands((prev) => {
+            return [...prev, e.target.value];
+          });
+        }
+      };
+    }
+  };
 
   let filteredProducts = [];
 
@@ -59,7 +85,7 @@ function Products() {
     });
 
     DISPLAYED_PRODUCTS = [...filteredProducts];
-    filteredProducts = []
+    filteredProducts = [];
   }
 
   if (brands.length !== 0) {
@@ -70,7 +96,7 @@ function Products() {
     });
 
     DISPLAYED_PRODUCTS = [...filteredProducts];
-    filteredProducts = []
+    filteredProducts = [];
   }
 
   const [accordions, setAccordions] = useState({
@@ -104,15 +130,33 @@ function Products() {
           </div>
           <div className={classes.filterContent}>
             <div className={classes.filterOption}>
-              <input value="headphones"  onChange={filter('types')} type="checkbox" id="headphones" />
+              <input
+                ref={(getParameterByName('type') === 'headphones') ? typeRef : null}
+                value="headphones"
+                onChange={filter('types')}
+                type="checkbox"
+                id="headphones"
+              />
               <label htmlFor="headphones">Headphones</label>
             </div>
             <div className={classes.filterOption}>
-              <input value="speakers" onChange={filter('types')} type="checkbox" id="speakers" />
+              <input
+              ref={(getParameterByName('type') === 'speakers') ? typeRef : null}
+                value="speakers"
+                onChange={filter('types')}
+                type="checkbox"
+                id="speakers"
+              />
               <label htmlFor="speakers">Speakers</label>
             </div>
             <div className={classes.filterOption}>
-              <input value="amps" onChange={filter('types')} type="checkbox" id="amps" />
+              <input
+              ref={(getParameterByName('type') === 'amps') ? typeRef : null}
+                value="amps"
+                onChange={filter('types')}
+                type="checkbox"
+                id="amps"
+              />
               <label htmlFor="amps">Amp's</label>
             </div>
           </div>
@@ -129,25 +173,52 @@ function Products() {
           </div>
           <div className={classes.filterContent}>
             <div className={classes.filterOption}>
-              <input value="jbl" onChange={filter('brands')} type="checkbox" id="jbl" />
+              <input
+              ref={(getParameterByName('brand') === 'jbl') ? brandRef : null}
+                value="jbl"
+                onChange={filter('brands')}
+                type="checkbox"
+                id="jbl"
+              />
               <label htmlFor="jbl">JBL</label>
             </div>
             <div className={classes.filterOption}>
-              <input value="B&O" onChange={filter('brands')} type="checkbox" id="B&O" />
-              <label onChange={filter('brands')} htmlFor="B&O">Bang & Olufsen</label>
+              <input
+                value="B&O"
+                onChange={filter('brands')}
+                type="checkbox"
+                id="B&O"
+              />
+              <label onChange={filter('brands')} htmlFor="B&O">
+                Bang & Olufsen
+              </label>
             </div>
             <div className={classes.filterOption}>
-              <input value="sony" onChange={filter('brands')} type="checkbox" id="sony" />
+              <input
+              ref={(getParameterByName('brand') === 'sony') ? brandRef : null}
+                value="sony"
+                onChange={filter('brands')}
+                type="checkbox"
+                id="sony"
+              />
               <label htmlFor="sony">Sony</label>
             </div>
             <div className={classes.filterOption}>
-              <input value="akai" onChange={filter('brands')} type="checkbox" id="akai" />
+              <input
+              ref={(getParameterByName('brand') === 'akai') ? brandRef : null}
+                value="akai"
+                onChange={filter('brands')}
+                type="checkbox"
+                id="akai"
+              />
               <label htmlFor="akai">Akai</label>
             </div>
           </div>
         </div>
       </aside>
       <section className={classes.productsList}>
+        {loading && <img  className={classes.loading} src={loadingGif} alt="loading.." />}
+        
         {DISPLAYED_PRODUCTS?.map((product) => {
           return (
             <Product

@@ -1,0 +1,90 @@
+.product{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.productDescription{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+}
+
+.productText{
+    width: 400px;
+    h3{
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+}
+
+.productImage{
+    width: 200px;
+    padding: 10px;
+    margin-right: 20px;
+
+    img{
+        border-radius: 10px;
+    }
+}
+
+.controls{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ammountControls{
+    display: flex;
+    margin-right: 40px;
+    border-radius: 5px;
+    overflow: hidden;
+    p{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+}
+.ammountControls button,
+.ammountControls p{
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #fff;
+    text-align: center;
+}
+
+.ammountControls button{
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.deleteItem{
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform .3s;
+}
+
+.deleteItem:hover{
+    transform: scale(1.1);
+}
+
+.minus{
+    color: rgb(202, 13, 13);
+}
+
+.plus{
+    color: #946128;
+}
+
+
+
+

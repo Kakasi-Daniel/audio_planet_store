@@ -5,9 +5,12 @@ import Footer from './Layout/Footer'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 import Products from './Pages/Products'
+import Product from './Pages/Product'
+import Checkout from './Pages/Checkout'
 import {auth} from './firebase'
 import {useContext,useEffect} from 'react'
 import UserContext from './globalState';
+import ScrollToTop from './ScrollToTop'
 
 function App() {
 
@@ -25,6 +28,7 @@ function App() {
 
   return <>
   <Router>
+    <ScrollToTop/>
     <Header/>
     <Switch>
     <Route path="/" exact>
@@ -40,8 +44,10 @@ function App() {
       <Products/>
     </Route>
     <Route path="/products/:productID">
+      <Product/>
     </Route>
     <Route path="/checkout">
+      <Checkout/>
     </Route>
     </Switch>
     <Footer/>

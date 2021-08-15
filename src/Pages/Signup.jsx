@@ -88,7 +88,7 @@ function Signup() {
           </div>
           <p>
             Aleardy have an account{' '}
-            <Link to="/login">Log in into you existing account</Link>
+            <Link to="/login">Log in into your existing account</Link>
           </p>
           <button type="submit">Sign up</button>
         </form>

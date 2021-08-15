@@ -10,8 +10,8 @@ function ProductBox(props) {
     const addItemHandler = () => {
         dispatchGlobal({
             type: "ADD_TO_BASKET",
-            productsAmmount: 1,
-            product: props.productID
+            product: {...props},
+            ammount: 1
         })
     }
 

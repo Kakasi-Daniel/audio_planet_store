@@ -5,9 +5,11 @@ import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 import { ContextWrapper } from './globalState';
 
+
 ReactDOM.render(
   <React.StrictMode>
     <ContextWrapper>
+      
       <App />
     </ContextWrapper>
   </React.StrictMode>,

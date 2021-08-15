@@ -19,3 +19,11 @@ export const getArrayProducts = async () =>{
 
     return productsArray;
 }
+export const getProductByID= async (ID) =>{
+    const response = await database.ref().child('products').child(ID).get();
+    const product = response.val()
+
+    return product;
+}
+
+

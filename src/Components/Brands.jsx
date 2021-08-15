@@ -9,19 +9,19 @@ function Brands() {
         <section className={classes.sony}>
           <div className={classes.description}>
             <h2>Sony's new speakers generation</h2>
-            <ProductLink className="fit" productID="?brand=sony" />
+            <ProductLink className="fit" productID="?brand=sony&type=speakers" />
           </div>
         </section>
         <section className={classes.jbl}>
           <div className={classes.description}>
             <h2>&nbsp;JBL's performance headphones</h2>
-            <ProductLink className="fit" productID="?brand=jbl" />
+            <ProductLink className="fit" productID="?brand=jbl&type=headphones" />
           </div>
         </section>
         <section className={classes.akai}>
           <div className={classes.description}>
             <h2>Akai's powerful amplifiers</h2>
-            <ProductLink className="fit" productID="?brand=akai" />
+            <ProductLink className="fit" productID="?brand=akai&type=amps" />
           </div>
         </section>
       </div>
