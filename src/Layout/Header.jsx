@@ -1,7 +1,7 @@
 import classes from './Header.module.scss';
 import Container from '../UI/Container';
 import logo from '../assets/logo.png';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link,useHistory } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -10,8 +10,8 @@ import globalContext from '../globalState';
 import {auth} from '../firebase'
 import { useState } from 'react';
 
-function Header() {
-  const [{ user, basketItems },] = useContext(globalContext);
+function Header({user}) {
+  const [{basketItems },] = useContext(globalContext);
   const [scrolled, setScrolled] = useState('')
   useEffect(() => {
     window.onscroll = e =>{
@@ -22,6 +22,8 @@ function Header() {
       }
     }
   }, [])
+
+  const history = useHistory();
 
   let navClasses = classes.nav
   if(scrolled){
@@ -61,11 +63,11 @@ function Header() {
           </ul>
         </div>
         <div className={classes.userMenu}>
-          {user ? (
+          {auth.currentUser ? (
             <div className={classes.accountDropdown}>
               <div className={classes.account}>
                 <AccountCircleIcon />
-                {auth.currentUser.displayName}
+                {user}
                 <ExpandMoreIcon />
               </div>
               <div className={classes.accountDropdownMenu}>
@@ -77,7 +79,10 @@ function Header() {
                     <Link to="/myorders">My orders</Link>
                   </li>
                   <li>
-                    <button  onClick={() => auth.signOut()} className={classes.logout}>Log out</button>
+                    <button  onClick={() => {
+                      history.push('/')
+                      auth.signOut()
+                      }} className={classes.logout}>Log out</button>
                   </li>
                 </ul>
               </div>

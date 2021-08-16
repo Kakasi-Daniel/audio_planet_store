@@ -3,6 +3,7 @@ import ProductLink from '../UI/ProductLink'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import globalState from '../globalState';
 import {useContext} from 'react';
+import {Link} from 'react-router-dom'
 
 function ProductBox(props) {
     const [,dispatchGlobal] = useContext(globalState);
@@ -17,9 +18,9 @@ function ProductBox(props) {
 
     return (
         <div className={classes.product} >
-            <div className={classes.productImage} ><img src={props.productImage} alt="productImage" /></div>
+            <Link to={"products/" + props.productID} className={classes.productImage} ><img draggable="false" src={props.productImage} alt="productImage" /></Link>
             <p className={classes.productName} >{props.productName}</p>
-            <p>{props.productPrice} RON</p>
+            <p>{props.productPrice.toFixed(2)} RON</p>
             <ProductLink productID={"/"+props.productID} />
             <button onClick={addItemHandler} className={classes.add} >ADD TO BASKET&nbsp;&nbsp;<span></span><AddShoppingCartIcon/></button>
         </div>

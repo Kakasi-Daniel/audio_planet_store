@@ -24,7 +24,7 @@ function CheckoutProduct(props) {
         <div className={classes.product} >
             <Link to={'products/'+props.id} className={classes.productDescription}>
                 <div className={classes.productImage}>
-                    <img src={props.image} alt="" />
+                    <img draggable="false" src={props.image} alt="" />
                 </div>
                 <div className={classes.productText}>
                     <h3>{props.name}</h3>

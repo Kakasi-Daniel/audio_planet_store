@@ -4,7 +4,7 @@ import { Link ,useHistory} from 'react-router-dom';
 import {auth} from '../firebase'
 import {useState} from 'react'
 
-function Login() {
+function Login({loginFailed}) {
     let history = useHistory();
     const [inputs, setInputs] = useState({
         email: '',
@@ -30,7 +30,7 @@ function Login() {
     history.push('/')
   })
   .catch((error) => {
-    console.log('login failed')
+    loginFailed(error)
   });
 
     }
@@ -54,12 +54,12 @@ function Login() {
             />
                 </div>
                 <div className={classes.inputContainer}>
-                    <label htmlFor="password">Enter your password:</label>
+                    <label htmlFor="pass">Enter your password:</label>
                     <input
               value={inputs.password}
               onChange={changeHandle('password')}
               placeholder="StRoNgPassWord3152"
-              id="password"
+              id="pass"
               type="password"
             />
                 </div>

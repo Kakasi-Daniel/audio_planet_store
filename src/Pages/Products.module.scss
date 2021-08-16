@@ -14,6 +14,7 @@
             padding: 10px;
             border-radius: 10px;
             font-size: 17px;
+            box-shadow: 0 2px  5px rgba(0, 0, 0, 0.5);
     
     
             .filterLabel{
@@ -79,3 +80,105 @@
     height: 100px;
     margin: auto;
 }
+
+.prodContent{
+    flex: 1;
+}
+
+    .filters{
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .searchInput{
+            flex: 0.9;
+            input{
+                font-family: 'Nunito Sans', sans-serif;
+                width:100%;
+                font-size: 18px;
+                padding: 5px 10px;
+                border: 2px #000000 solid;
+                border-radius: 20px;
+                box-shadow: 0 0 8px rgba(0, 0, 0, 0.479);
+            }
+
+            input:focus{
+                outline: none;
+                border: 2px #ad804b solid;
+                box-shadow: 0 0 10px #ad804b;
+            }
+        }
+
+        
+    }
+
+    .pagination{
+
+        display: flex;
+        
+        button{
+            font-family: 'Nunito Sans', sans-serif;
+            margin-right: 5px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            border: none;
+            border-radius: 2px;
+            font-weight: 500;
+            font-size: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.322);
+        }
+
+        button:hover{
+            background-color: #ffdbae;
+        }
+
+        .active{
+            background-color: #ad804b;
+            color: #fff;
+        }
+        .active:hover{
+            background-color: #ad804b;
+            color: #fff;
+        }
+    }
+
+    .paginationBottom{
+        width: 100%;
+        div{
+            margin: 20px auto;
+        }
+    }
+
+    .priceOrderBtn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 100px;
+        padding: 10px;
+        font-size: 18px;
+        border: none;
+        background-color: #ad804b;
+        color: #fff;
+        cursor: pointer;
+        font-family: 'Nunito Sans', sans-serif;
+        justify-content: space-between;
+        transition: box-shadow .3s ease;
+    }
+    .priceOrderBtn:hover{
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .itemsNotFound{
+        p{
+            font-size: 20px;
+            width: fit-content;
+            margin: auto;
+            text-align: center;
+        }
+    }

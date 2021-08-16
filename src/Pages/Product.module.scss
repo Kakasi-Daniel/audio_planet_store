@@ -30,9 +30,11 @@
 
     .productImage{
         padding: 20px;
+        
 
         img{
             border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.158);
         }
     }
     
@@ -90,6 +92,7 @@
     margin-bottom: 20px;
     justify-content: center;
     background-color: #fff;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.342);
     
 
     & button,
@@ -179,7 +182,7 @@
         overflow: hidden;
         img{
             border-radius: 20px;
-            
+           
         }
     }
 

@@ -1,59 +1,104 @@
-import Header from './Layout/Header'
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-import Home from './Pages/Home'
-import Footer from './Layout/Footer'
-import Login from './Pages/Login'
-import Signup from './Pages/Signup'
-import Products from './Pages/Products'
-import Product from './Pages/Product'
-import Checkout from './Pages/Checkout'
-import {auth} from './firebase'
-import {useContext,useEffect} from 'react'
+import Header from './Layout/Header';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import Home from './Pages/Home';
+import Footer from './Layout/Footer';
+import Login from './Pages/Login';
+import Signup from './Pages/Signup';
+import Products from './Pages/Products';
+import Product from './Pages/Product';
+import Checkout from './Pages/Checkout';
+import MyAccount from './Pages/MyAccount';
+import OrderDetails from './Pages/OrderDetails';
+import UserDetailsUpdate from './Components/UserDetailsUpdate';
+import { auth } from './firebase';
+import { useContext, useEffect, useState } from 'react';
 import UserContext from './globalState';
-import ScrollToTop from './ScrollToTop'
+import ScrollToTop from './ScrollToTop';
 
 function App() {
+  const [{user}, dispatchGlobal] = useContext(UserContext);
+  const [username,setUsername] = useState(user?.displayName)
+  const [showUpdate,setShowUpdate] = useState(false)
+  const [errorLogin,setErrorLogin] = useState(false)
 
-  const [,dispatchGlobal] = useContext(UserContext)
+  const onUsernameChangedHandler = (newUsername,show=false) =>{
+    setUsername(newUsername);
+    if(show){
+      setShowUpdate(true)
+      setTimeout(()=>{
+        setShowUpdate(false)
+      },4000)
+    }
+  }
 
-  useEffect(()=>{
+  const loginFailedHandler = err =>{
+    if(err){
+      setErrorLogin(err.message)
+      setTimeout(()=>{
+        setErrorLogin(false)
+      },4000)
+    }
+  }
+
+  useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if(user){
-        dispatchGlobal({type:'SET_USER',user:user})
-      }else{
-        dispatchGlobal({type:'SET_USER',user:null})
+      if (user) {
+        setUsername(user.displayName);
+        dispatchGlobal({ type: 'SET_USER', user: { ...user } });
+      } else {
+        dispatchGlobal({ type: 'SET_USER', user: null });
       }
-    })
-  },[])
+    });
 
-  return <>
-  <Router>
-    <ScrollToTop/>
-    <Header/>
-    <Switch>
-    <Route path="/" exact>
-      <Home/>
-    </Route>
-    <Route path="/login">
-      <Login/>
-    </Route>
-    <Route path="/signup" >
-      <Signup/>
-    </Route>
-    <Route path="/products" exact>
-      <Products/>
-    </Route>
-    <Route path="/products/:productID">
-      <Product/>
-    </Route>
-    <Route path="/checkout">
-      <Checkout/>
-    </Route>
-    </Switch>
-    <Footer/>
-  </Router>
+    const fromLocal = localStorage.getItem('stored') ? JSON.parse(localStorage.getItem('stored')) : null;
+
+    if(fromLocal){
+      dispatchGlobal({type:"SET_FROM_LOCAL", store:fromLocal})
+    }
     
-  </>;
+  }, []);
+
+  return (
+    <> 
+    {showUpdate && <UserDetailsUpdate text="User details succesfully updated" color="green" />}
+    {errorLogin && <UserDetailsUpdate text={errorLogin} color="red" />}
+      <Router>
+        <ScrollToTop />
+        <Header user={username}/>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/login">
+            <Login loginFailed={loginFailedHandler} />
+          </Route>
+          <Route path="/signup">
+            <Signup signUpFailed={loginFailedHandler} onUsernameChanged={onUsernameChangedHandler} />
+          </Route>
+          <Route path="/products" exact>
+            <Products />
+          </Route>
+          <Route path="/products/:productID">
+            <Product />
+          </Route>
+          <Route path="/checkout">
+            <Checkout />
+          </Route>
+          <Route path="/myaccount">
+            <MyAccount onUsernameChanged={onUsernameChangedHandler} />
+          </Route>
+          <Route path="/placeorder">
+            <OrderDetails/>
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
+    </>
+  );
 }
 
 export default App;

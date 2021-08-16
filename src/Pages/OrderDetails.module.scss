@@ -1,0 +1,104 @@
+.myAccountPage{
+    font-family: 'Nunito Sans', sans-serif;
+    margin-top: 120px;
+    min-height: 70vh;
+}
+
+.userDetails{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(500px,1fr));
+    gap: 20px;
+    
+    .inputLabel{
+        color: #814f16;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+
+    .inputLabel input,
+    .submitBtn{
+        display: block;
+        width: 100%;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 18px;
+        border: 1px solid #000;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.514);
+    }
+    
+    .inputLabel input:focus{
+        outline: none;
+        border: 1px solid #a56821;
+        box-shadow: 0 0 5px #a56821;
+    }
+
+    .submitBtn{
+        grid-column: 1/-1;
+        background-color: #a1794be0;
+        border: none;
+        color: #000;
+        cursor: pointer;
+        color: #fff;
+        transition: background-color .3s;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .submitBtn:hover{
+        background-color: #a1794b;
+    }
+
+    .paymentMethodBtn{
+        width: 100%;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 18px;
+        border: 1px solid #000;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.514);
+        color: #000;
+        cursor: pointer;
+        transition: background-color .3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .paymentMethodBtn:hover{
+        background-color: rgba(134, 90, 39, 0.6);
+        color: #fff;
+        border: 1px solid rgba(134, 90, 39, 0.6);
+    }
+
+    .paymentMethodBtn.active{
+        background-color: #a56821;
+        color: #fff;
+        border: 1px solid #a56821;
+    }
+
+    .paymentMethodBtn.active:hover{
+        background-color: #a56821;
+        color: #fff;
+        border: 1px solid #a56821;
+    }
+
+
+}
+
+.summary{
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+    span{
+        color: greenyellow;
+    }
+}

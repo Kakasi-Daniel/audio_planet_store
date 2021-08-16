@@ -1,0 +1,40 @@
+.notification{
+    position: fixed;
+    top: 5%;
+    color: #fff;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #fff;
+    font-family: 'Nunito Sans', sans-serif;
+    animation: leftToRightFade 4s forwards;
+}
+
+.green{
+    background-color: rgba(0, 128, 0, 0.8);
+}
+.red{
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+@keyframes leftToRightFade {
+    0%{
+        left: -310px;
+    }
+
+    20%{
+        left: 5%;
+    }
+
+    80%{
+        left: 5%;
+    }
+
+    100%{
+        left: -310px;
+    }
+}

@@ -26,4 +26,12 @@ export const getProductByID= async (ID) =>{
     return product;
 }
 
+export const getUserDetailsByID= async (ID) =>{
+    const response = await database.ref().child('users').child(ID).child('userDetails').get();
+    const details = response.val();
+
+    return details;
+}
+
+
 

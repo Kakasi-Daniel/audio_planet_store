@@ -1,11 +1,12 @@
-import classes from './Login.module.scss';
-import logo from '../assets/logo.png';
+
+import classes from './Signup.module.scss';
+
 import { Link ,useHistory} from 'react-router-dom';
 import { auth } from '../firebase';
 import { useState,useContext } from 'react';
 import globalContext from '../globalState';
 
-function Signup() {
+function Signup({onUsernameChanged,signUpFailed}) {
 
     const [,dispatch] = useContext(globalContext);
 
@@ -37,14 +38,15 @@ function Signup() {
             displayName: inputs.username,
           }).then(() => {
             dispatch({type:'SET_USER',user: auth.currentUser})
-            history.push('/')
+            onUsernameChanged(inputs.username)
+            history.push('/myaccount')
           }).catch((error) => {
             console.log('username change error')
           });  
           
       })
       .catch((error) => {
-        console.log(error)
+        signUpFailed(error)
       });
   };
 
@@ -52,7 +54,7 @@ function Signup() {
     <div className={classes.loginContainer}>
       <div>
         <div className={classes.logo}>
-          <img src={logo} alt="logo" />
+          <img src="https://media0.giphy.com/media/RMTQiRYAuvvJb1k6al/giphy.gif" alt="logo" />
         </div>
         <h2>Join the greatest audiophile community</h2>
         <form onSubmit={submitHandler}>

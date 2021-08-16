@@ -16,6 +16,7 @@
 
     img{
         border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
 
     .add{
@@ -32,6 +33,7 @@
         border: 2px #000 solid;
         overflow: hidden;
         transition: color .3s ease;
+        box-shadow: 0 0 10px rgba(51, 51, 51, 0.377);
 
 
         span{

@@ -56,12 +56,12 @@ function Product() {
           <div className={classes.product}>
             <div className={classes.productDetails}>
               <div className={classes.productImage}>
-                <img src={product.photo} alt="" />
+                <img draggable="false" src={product.photo} alt="" />
               </div>
               <div className={classes.productTextDetail}>
                 <p>{product.brand}</p>
                 <h2>{product.fullname}</h2>
-                <p>{product.price} RON</p>
+                <p>{product.price.toFixed(2)} RON</p>
               </div>
             </div>
             <div className={classes.addProduct}>
@@ -164,24 +164,28 @@ function Product() {
         <div className={classes.productImages}>
           <div>
             <img
+            draggable="false"
               src="https://a331998513.github.io/audiophile-ecommerce-website/static/media/image-gallery-1.fec85b48.jpg"
               alt=""
             />
           </div>
           <div>
             <img
+            draggable="false"
               src="https://a331998513.github.io/audiophile-ecommerce-website/static/media/image-gallery-2.a88a2477.jpg"
               alt=""
             />
           </div>
           <div>
             <img
+            draggable="false"
               src="https://a331998513.github.io/audiophile-ecommerce-website/static/media/image-gallery-3.431f9028.jpg"
               alt=""
             />
           </div>
           <div>
             <img
+            draggable="false"
               src="https://c0.wallpaperflare.com/preview/251/57/262/adjusting-audio-black-and-white-close-up.jpg"
               alt=""
             />

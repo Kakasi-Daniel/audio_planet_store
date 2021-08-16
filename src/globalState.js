@@ -7,6 +7,16 @@ const defaultState = {
     user: null
 }
 
+const storeToLocal = (basketToStore,basketItemsToStore,basketTotalToStore) =>{
+    const toLocalStorage = {
+        basket: basketToStore,
+        basketItems: basketItemsToStore,
+        basketTotal: basketTotalToStore
+    }
+
+    localStorage.setItem('stored', JSON.stringify(toLocalStorage));
+}
+
 const UserContext = createContext(defaultState)
 
 const reducer = (state,action) =>{
@@ -15,6 +25,13 @@ const reducer = (state,action) =>{
         return {
             ...state,
             user: action.user
+        }
+    }
+
+    if(action.type === 'SET_FROM_LOCAL'){
+        return {
+            ...state,
+            ...action.store
         }
     }
     if(action.type === 'ADD_TO_BASKET'){
@@ -49,6 +66,9 @@ const reducer = (state,action) =>{
             newBasketItems += product.productAmmount;
             newBasketTotal += (product.productAmmount * product.productPrice);
         })
+
+        
+        storeToLocal(newProducts,newBasketItems,newBasketTotal);
 
         return {
             ...state,
@@ -87,6 +107,8 @@ const reducer = (state,action) =>{
             newBasketTotal = 0;
         }
 
+        storeToLocal(newProducts,newBasketItems,newBasketTotal);
+
         return {
             ...state,
             basketTotal: newBasketTotal,
@@ -114,6 +136,8 @@ const reducer = (state,action) =>{
         if(newBasketItems === 0){
             newBasketTotal = 0;
         }
+
+        storeToLocal(newProducts,newBasketItems,newBasketTotal);
 
         return {
             ...state,

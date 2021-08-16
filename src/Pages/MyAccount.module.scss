@@ -1,0 +1,91 @@
+.myAccountPage{
+    font-family: 'Nunito Sans', sans-serif;
+    margin-top: 120px;
+    min-height: 70vh;
+
+    .emailVerified{
+        color: green;
+        display: flex;
+        align-items: center;
+    }
+
+    .emailNotVerified{
+        color: red;
+    }
+
+    .emailSent{
+        color: #946128;
+    }
+    h2{
+        margin: 10px 0;
+        font-weight: 600;
+        font-size: 25px;
+    }
+
+    .sendEmailBtn{
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 17px;
+        border: none;
+        background-color: #946128;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color .3s;
+    }
+
+    .sendEmailBtn:hover{
+        background-color: #a56821;
+    }
+
+
+}
+
+.userDetails{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(500px,1fr));
+    gap: 20px;
+    
+    .inputLabel{
+        color: #814f16;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+
+    .inputLabel input,
+    .submitBtn{
+        display: block;
+        width: 100%;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 18px;
+        border: 1px solid #000;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.514);
+    }
+    
+    .inputLabel input:focus{
+        outline: none;
+        border: 1px solid #a56821;
+        box-shadow: 0 0 5px #a56821;
+    }
+
+    .submitBtn{
+        grid-column: 1/-1;
+        background-color: #a1794be0;
+        border: none;
+        color: #000;
+        cursor: pointer;
+        color: #fff;
+        transition: background-color .3s;
+        margin-bottom: 30px;
+    }
+
+    .submitBtn:hover{
+        background-color: #a1794b;
+    }
+}

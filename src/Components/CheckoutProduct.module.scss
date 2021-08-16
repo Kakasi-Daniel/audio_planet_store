@@ -27,6 +27,7 @@
 
     img{
         border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.178);
     }
 }
 
@@ -40,6 +41,7 @@
     margin-right: 40px;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.219);
     p{
         display: flex;
         align-items: center;
