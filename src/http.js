@@ -1,4 +1,4 @@
-import {database} from './firebase'
+import {database,auth} from './firebase'
 
 export const getArrayProducts = async () =>{
     const response = await database.ref().child('products').get();
@@ -31,6 +31,81 @@ export const getUserDetailsByID= async (ID) =>{
     const details = response.val();
 
     return details;
+}
+
+export const sendUserDetails = (phone,county,city,address,postal) =>{
+    database.ref('users/' + auth.currentUser.uid+"/userDetails").set({
+        phone: phone,
+        county: county,
+        city: city,
+        address: address,
+        postal: postal
+      }, (error) => {
+        if (error) {
+          console.log('updateing user detail failed' + error)
+        } else {
+          console.log("user details saved")
+        }
+      });
+}
+
+
+
+export const sendOrder = (basket,totalItems,totalAmmount,date,orderDetails,orderID) =>{
+    database.ref('users/' + auth.currentUser.uid+"/orders/"+orderID).set({
+       basket,
+       totalItems,
+       totalAmmount,
+       orderDetails,
+       date
+      }, (error) => {
+        if (error) {
+          console.log('error at sending orde' + error)
+        } else {
+          console.log("orderSent")
+        }
+      });
+}
+
+export const sendOrderNoAccount = (basket,totalItems,totalAmmount,date,orderDetails,orderID) =>{
+    database.ref('orders/'+orderID).set({
+       basket,
+       totalItems,
+       totalAmmount,
+       orderDetails,
+       date
+      }, (error) => {
+        if (error) {
+          console.log('error at sending orde' + error)
+        } else {
+          console.log("orderSent")
+        }
+      });
+}
+
+export const getUserOrdersByID = async (ID) =>{
+  const response = await database.ref().child('users').child(ID).child('orders').get();
+  const orders = response.val();
+
+  const ordersArray = []
+
+  for(let key in orders){
+    ordersArray.push({
+      orderID: key,
+      total: orders[key].totalAmmount,
+      date: orders[key].date,
+    })
+  }
+
+  return ordersArray;
+}
+
+export const getOrderByID = async (uid,orderID) =>{
+  const response = await database.ref().child('users').child(uid).child('orders').child(orderID).get();
+  const order = response.val();
+
+
+  return order;
 }
 
 

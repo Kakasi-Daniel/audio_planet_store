@@ -4,27 +4,55 @@ import Container from '../UI/Container';
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import globalContext from '../globalState';
-import { getUserDetailsByID } from '../http';
+import { getUserDetailsByID, sendOrder, sendOrderNoAccount } from '../http';
 import CheckIcon from '@material-ui/icons/Check';
 import SendIcon from '@material-ui/icons/Send';
 import CheckoutProduct from '../Components/CheckoutProduct';
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 import NumberFormat from 'react-number-format';
+import rand from 'random-key';
+import OrderSucces from '../Components/OrderSucces';
+import FlipMove from 'react-flip-move';
 
 function OrderDetails() {
-  const [{ user,basket,basketItems,basketTotal}, dispatchGlobal] = useContext(globalContext);
+  const [{ user, basket, basketItems, basketTotal }, dispatchGlobal] =
+    useContext(globalContext);
   const [payWithCard, setPayWithCard] = useState(true);
+  const [orderSent, setOrderSent] = useState(false);
+  const [orderID, ] = useState(rand.generate())
+  
 
-  const history = useHistory()
+  const history = useHistory();
+
+  const sendOrderHandler = (e) => {
+    e.preventDefault();
+    setOrderSent(true);
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+
+    if (user) {
+      sendOrder(basket, basketItems, basketTotal, today, inputs, orderID);
+    } else {
+      sendOrderNoAccount(
+        basket,
+        basketItems,
+        basketTotal,
+        today,
+        inputs,
+        orderID
+      );
+    }
+    dispatchGlobal({ type: 'DELETE_BASKET' });
+  };
 
   const methodChangeHandler = (e) => {
     e.preventDefault();
     setPayWithCard((prev) => !prev);
   };
-
-  if(basketItems === 0){
-    history.push('/checkout')
-  }
 
   const [inputs, setInputs] = useState({
     personal: {
@@ -74,12 +102,12 @@ function OrderDetails() {
     dispatchGlobal({ type: 'ADD_TO_BASKET', product: product, ammount: 1 });
   };
 
-  const backOne = (product) => [
-    dispatchGlobal({ type: 'DECREASE_ONE', productID: product }),
-  ];
-  const deleteItem = (product) => [
-    dispatchGlobal({ type: 'REMOVE_FROM_BASKET', productID: product }),
-  ];
+  const backOne = (product) => {
+    dispatchGlobal({ type: 'DECREASE_ONE', productID: product });
+  };
+  const deleteItem = (product) => {
+    dispatchGlobal({ type: 'REMOVE_FROM_BASKET', productID: product });
+  };
 
   const onInputChangeGenerator = (type, field) => {
     return function (e) {
@@ -97,11 +125,15 @@ function OrderDetails() {
     };
   };
 
+  if (!basketItems && !orderSent) {
+    history.push('checkout');
+  }
+
   return (
     <Container className={classes.myAccountPage}>
-      
+      {!orderSent ? (
         <>
-          <form className={classes.userDetails}>
+          <form onSubmit={sendOrderHandler} className={classes.userDetails}>
             <label className={classes.inputLabel} htmlFor="name">
               Name
               <input
@@ -228,32 +260,48 @@ function OrderDetails() {
               </>
             )}
             <button className={classes.submitBtn} type="submit">
-              Place Order
-              &nbsp;
-              <SendIcon/>
+              Place Order &nbsp;
+              <SendIcon />
             </button>
           </form>
-              
+
           <h2 className={classes.summary}>
-                 You have <span>{basketItems} {basketItems === 1 ? 'item' : 'items'}</span> in you
-                 basket with a total of{' '}
-                 <span><NumberFormat
-                   value={basketTotal.toFixed(2)}
-                   displayType={'text'}
-                   thousandSeparator={true}
-                 />{' '}
-                 RON</span>
-               </h2>
+            You have{' '}
+            <span>
+              {basketItems} {basketItems === 1 ? 'item' : 'items'}
+            </span>{' '}
+            in you basket with a total of{' '}
+            <span>
+              <NumberFormat
+                value={basketTotal.toFixed(2)}
+                displayType={'text'}
+                thousandSeparator={true}
+              />{' '}
+              RON
+            </span>
+          </h2>
 
-              {
-              basket?.map(product =>{
-                return(
-                  <CheckoutProduct key={product.productID}  onDelete={deleteItem} onDecrease={backOne} onIncrease={stepOne} ammount={product.productAmmount} name={product.productName} price={product.productPrice} image={product.productImage} id={product.productID}/>
-              )
-              })}
-
+          <FlipMove>
+          {basket?.map((product) => {
+            return (
+              <CheckoutProduct
+                key={product.productID}
+                onDelete={deleteItem}
+                onDecrease={backOne}
+                onIncrease={stepOne}
+                ammount={product.productAmmount}
+                name={product.productName}
+                price={product.productPrice}
+                image={product.productImage}
+                id={product.productID}
+              />
+            );
+          })}
+          </FlipMove>
         </>
-      
+      ) : 
+          <OrderSucces orderID={orderID}/>
+      }
     </Container>
   );
 }

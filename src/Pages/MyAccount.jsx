@@ -8,7 +8,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import {useHistory} from 'react-router-dom';
 import {useContext} from 'react'
 import globalContext from '../globalState';
-import {getUserDetailsByID} from '../http';
+import {getUserDetailsByID,sendUserDetails} from '../http';
 
 function MyAccount({onUsernameChanged}) {
   const [emailSent, setEmailSent] = useState(false);
@@ -40,7 +40,7 @@ function MyAccount({onUsernameChanged}) {
         getUserDetailsByID(user.uid).then(data =>{
             setInputs({
                 personal:{
-                    name: user.displayName,
+                    name: auth.currentUser?.displayName,
                     phone: data?.phone || ""
                   },
                   details: {
@@ -70,19 +70,8 @@ function MyAccount({onUsernameChanged}) {
         console.log('there was an error')
       });
 
-      database.ref('users/' + auth.currentUser.uid+"/userDetails").set({
-        phone: inputs.personal.phone,
-        county: inputs.details.county,
-        city: inputs.details.city,
-        address: inputs.details.address,
-        postal: inputs.details.postal
-      }, (error) => {
-        if (error) {
-          console.log('updateing user detail failed' + error)
-        } else {
-          console.log("user details saved")
-        }
-      });
+      sendUserDetails(inputs.personal.phone,inputs.details.county,inputs.details.city,inputs.details.address,inputs.details.postal)
+
       history.push('/')
   }
 

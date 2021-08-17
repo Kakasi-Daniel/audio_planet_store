@@ -148,6 +148,20 @@ const reducer = (state,action) =>{
 
     }
 
+    if (action.type === "DELETE_BASKET"){
+
+        
+        storeToLocal([],0,0);
+
+        return {
+            ...state,
+            basket: [],
+            basketTotal: 0,
+            basketItems: 0
+        }
+
+    }
+
     return defaultState;
 }
 

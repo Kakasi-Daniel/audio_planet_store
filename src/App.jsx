@@ -12,6 +12,8 @@ import Products from './Pages/Products';
 import Product from './Pages/Product';
 import Checkout from './Pages/Checkout';
 import MyAccount from './Pages/MyAccount';
+import MyOrders from './Pages/MyOrders';
+import Order from './Pages/Order';
 import OrderDetails from './Pages/OrderDetails';
 import UserDetailsUpdate from './Components/UserDetailsUpdate';
 import { auth } from './firebase';
@@ -91,8 +93,14 @@ function App() {
           <Route path="/myaccount">
             <MyAccount onUsernameChanged={onUsernameChangedHandler} />
           </Route>
+          <Route path="/myorders">
+            <MyOrders/>
+          </Route>
           <Route path="/placeorder">
             <OrderDetails/>
+          </Route>
+          <Route path="/orders/:orderID">
+            <Order/>
           </Route>
         </Switch>
         <Footer />

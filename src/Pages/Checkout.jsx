@@ -9,6 +9,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import NumberFormat from 'react-number-format';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import FlipMove from 'react-flip-move';
 
 function Checkout() {
   const [{ basket, basketTotal, basketItems }, dispatchGlobal] =
@@ -65,21 +66,45 @@ function Checkout() {
           </div>
         </div>
       ) : (
-        basket?.map((product) => {
-          return (
-            <CheckoutProduct
-              key={product.productID}
-              onDelete={deleteItem}
-              onDecrease={backOne}
-              onIncrease={stepOne}
-              ammount={product.productAmmount}
-              name={product.productName}
-              price={product.productPrice}
-              image={product.productImage}
-              id={product.productID}
-            />
-          );
-        })
+        <FlipMove
+        staggerDelayBy={150}
+        enterAnimation={{
+          from: {
+            transform: 'rotateX(180deg)',
+            opacity: 0.1,
+          },
+          to: {
+            transform: '',
+          },
+        }}
+        leaveAnimation={{
+          from: {
+             transform: '',
+          },
+          to: {
+            transform: 'rotateX(-120deg)',
+            opacity: 0.1,
+          },
+        }}
+        >
+          {
+            basket?.map((product) => {
+              return (
+                <CheckoutProduct
+                  key={product.productID}
+                  onDelete={deleteItem}
+                  onDecrease={backOne}
+                  onIncrease={stepOne}
+                  ammount={product.productAmmount}
+                  name={product.productName}
+                  price={product.productPrice}
+                  image={product.productImage}
+                  id={product.productID}
+                />
+              );
+            })
+          }
+        </FlipMove>
       )}
     </Container>
   );

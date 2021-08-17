@@ -2,8 +2,9 @@ import classes from './CheckoutProduct.module.scss';
 import {useState} from 'react'
 import DeleteIcon from '@material-ui/icons/Delete';
 import {Link} from 'react-router-dom'
+import { forwardRef } from 'react';
 
-function CheckoutProduct(props) {
+const CheckoutProduct = forwardRef((props,ref) => {
 
     const [ammount, setAmmount] = useState(props.ammount)
 
@@ -21,7 +22,7 @@ function CheckoutProduct(props) {
     }
 
     return (
-        <div className={classes.product} >
+        <div ref={ref} className={classes.product} >
             <Link to={'products/'+props.id} className={classes.productDescription}>
                 <div className={classes.productImage}>
                     <img draggable="false" src={props.image} alt="" />
@@ -41,6 +42,6 @@ function CheckoutProduct(props) {
             </div>
         </div>
     )
-}
+})
 
 export default CheckoutProduct

@@ -1,0 +1,60 @@
+.orders{
+
+    margin-top: 150px;
+    min-height: 70vh;
+    font-weight: 400;
+    font-family: 'Nunito Sans', sans-serif;
+
+    .order{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px;
+        background-color: #000;
+        color: #fff;
+        padding: 20px;
+        border-radius: 20px;
+        font-family: 'Nunito Sans', sans-serif;
+        border: 5px solid #f7af5d;
+
+        p span{
+            font-weight: bold;
+            color: greenyellow;
+        }
+        
+    }
+
+    .toOrder{
+        text-decoration: none;
+        border: 2px #fff solid;
+        border-radius: 20px;
+        padding: 10px 20px;
+        color: #fff;
+        transition: color .3s ease, background-color .3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .toOrder:hover{
+       background-color: #fff;
+       color: #000;
+    }
+}
+
+.noOrders{
+    width: 100%;
+
+    &Content{
+        max-width: 600px;
+        margin: auto;
+        text-align: center;
+        h2{
+            margin-bottom: 30px;
+        }
+
+        img{
+            border-radius: 20px;
+        }
+    }
+}

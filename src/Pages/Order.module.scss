@@ -1,0 +1,91 @@
+.order {
+  font-family: 'Nunito Sans', sans-serif;
+  min-height: 70vh;
+}
+
+.orderHeader {
+  background-color: #000;
+  color: #fff;
+  margin-top: 130px;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  h2 {
+    margin: 10px;
+  }
+}
+
+.orderDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 25px;
+  text-align: center;
+
+  h3 {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    grid-column: 1/-1;
+  }
+
+  p {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-evenly;
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
+.orderItems {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+  font-weight: 600;
+
+  .orderProduct {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:  #c79f72bb;
+    border-radius: 20px;
+    color: #000;
+    text-decoration: none;
+  }
+
+  .orderProduct:hover {
+    
+    background-color:  #c79f72;
+    
+  }
+
+  .productDetails {
+    display: flex;
+    align-items: center;
+
+    .imageContainer {
+      margin: 10px;
+    }
+
+    img {
+      width: 100px;
+      border-radius: 10px;
+    }
+  }
+
+  .productAmmount{
+      color: #000;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 10px;
+  }
+}
