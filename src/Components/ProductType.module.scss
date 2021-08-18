@@ -3,6 +3,9 @@
     width: 300px;
     text-decoration: none;
     font-family: 'Nunito Sans', sans-serif;
+    @media (max-width:600px) {
+        margin-bottom: 220px;
+    }
 
     p{
         background-color: #a77b4a;

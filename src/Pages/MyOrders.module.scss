@@ -17,6 +17,14 @@
         border-radius: 20px;
         font-family: 'Nunito Sans', sans-serif;
         border: 5px solid #f7af5d;
+        @media (max-width:700px) {
+            display: block;
+            text-align: center;
+            margin: 0;
+            & >*{
+                margin-bottom: 10px;
+            }
+          }
 
         p span{
             font-weight: bold;
@@ -34,6 +42,9 @@
         transition: color .3s ease, background-color .3s ease;
         display: flex;
         align-items: center;
+        @media (max-width:700px) {
+            justify-content: space-evenly;
+          }
     }
 
     .toOrder:hover{

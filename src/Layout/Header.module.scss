@@ -5,7 +5,7 @@
   width: 100%;
   top: 0;
   z-index: 2;
-  transition: height .5s ease;
+  transition: height 0.5s ease;
   .navbar {
     height: 100%;
     display: flex;
@@ -14,158 +14,335 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.568);
     .logo {
       width: 300px;
+      @media (max-width: 600px) {
+        width: 250px;
+      }
     }
-    .navMenu ul{
-        display: flex;
-        list-style: none;
-        & li{
-            margin: 0 20px;
-        }
-        & a{
-            text-decoration: none;
-            color: #fff;
-            font-family: 'Nunito Sans', sans-serif;
-            transition: color .3s ease;
-            font-size: 18px;
-        }
-        & a:hover{
-            color: #d4a064;
-        }
+    .navMenu ul {
+      display: flex;
+      list-style: none;
+      @media (max-width: 600px) {
+        display: none;
+      }
+      & li {
+        margin: 0 20px;
+      }
+      & a {
+        text-decoration: none;
+        color: #fff;
+        font-family: 'Nunito Sans', sans-serif;
+        transition: color 0.3s ease;
+        font-size: 18px;
+      }
+      & a:hover {
+        color: #d4a064;
+      }
 
-        .active{
-            color: #d4a064;
-        }
+      .active {
+        color: #d4a064;
+      }
     }
-    .userMenu{
+    .userMenu {
+      display: flex;
+      align-items: center;
+
+      & > * {
+        margin: 0 10px;
+      }
+
+      .btn {
+        background-color: #fff;
+        text-decoration: none;
+        color: #000;
+        border: none;
+        font-size: 18px;
+        padding: 3px 20px;
+        font-family: 'Nunito Sans', sans-serif;
+        border-radius: 2px;
+        opacity: 0.88;
+        transition: opacity 0.3s ease;
+        @media (max-width: 600px) {
+          display: none;
+        }
+      }
+
+      .btn:hover {
+        opacity: 1;
+      }
+
+      .btnSignup {
+        background-color: #b48550;
+        color: #fff;
+      }
+
+      .cartIcon {
+        position: relative;
+        transition: transform 0.3s ease;
+      }
+
+      .cartIcon:hover {
+        transform: scale(1.2);
+      }
+
+      .white {
+        color: #fff;
+      }
+
+      .basketall {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        background-color: #d4a064;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+        border-radius: 50%;
+        font-family: 'Nunito Sans', sans-serif;
+        bottom: -10px;
+        right: -10px;
+      }
+
+      .accountDropdown {
+        position: relative;
+      }
+
+      .account {
+        color: #fff;
         display: flex;
         align-items: center;
-        & > *{
-            margin: 0 10px;
-        }
+        font-family: 'Nunito Sans', sans-serif;
+        @media (max-width: 600px) {
+            display: none;
+          }
+      }
+      .account:hover {
+        color: #d4a064;
+      }
 
-        .btn{
-            background-color: #fff;
+      .account > * {
+        margin: 0 5px;
+      }
+
+      .accountDropdownMenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 150px;
+        background-color: #fff;
+        max-height: 0px;
+        overflow: hidden;
+        transition: max-height 0.3s;
+
+        ul {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          li {
+            width: 100%;
+            text-align: center;
+          }
+          a,
+          button {
             text-decoration: none;
-            color: #000;
+            background-color: transparent;
             border: none;
+            color: #000;
             font-size: 18px;
-            padding: 3px 20px;
             font-family: 'Nunito Sans', sans-serif;
-            border-radius: 2px;
-            opacity: .88;
-            transition: opacity .3s ease;
-        }
+            display: block;
+            padding: 7px;
+            cursor: pointer;
+            width: 100%;
+          }
 
-        .btn:hover{
-            opacity: 1;
-        }
-
-        .btnSignup{
-            background-color: #b48550;
+          a:hover,
+          button:hover {
+            background-color: #000;
             color: #fff;
+          }
         }
+      }
 
-        .cartIcon{
-            position: relative;
-            transition: transform .3s ease;
-        }
-
-        .cartIcon:hover{
-            transform: scale(1.2);
-        }
-
-        .white{
-            color: #fff;
-        }
-
-        .basketall{
-            width: 20px;
-            height: 20px;
-            font-size: 12px;
-            background-color: #d4a064;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            z-index: 1;
-            border-radius: 50%;
-            font-family: 'Nunito Sans', sans-serif;
-            bottom: -10px;
-            right: -10px;
-        }
-
-        .accountDropdown{
-            position: relative;
-        }
-
-        .account{
-            color: #fff;
-            display: flex;
-            align-items: center;
-            font-family: 'Nunito Sans', sans-serif;
-        }
-        .account:hover{
-            color: #d4a064;
-        }
-
-
-        .account > *{
-            margin: 0 5px;
-        }
-
-        .accountDropdownMenu{
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 150px;
-            background-color: #fff;
-            max-height: 0px;
-            overflow: hidden;
-            transition: max-height .3s;
-
-            ul{
-                list-style: none;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-                li{
-                    width: 100%;
-                    text-align: center;
-                }
-                a , button{
-                    text-decoration: none;
-                    background-color: transparent;
-                    border: none;
-                    color: #000;
-                    font-size: 18px;
-                    font-family: 'Nunito Sans', sans-serif;
-                    display: block;
-                    padding: 7px;
-                    cursor: pointer;
-                    width: 100%;
-                }
-
-                a:hover , button:hover{
-                    background-color: #000;
-                    color: #fff;
-                }
-            }
-        }
-
-        .accountDropdown:hover .accountDropdownMenu{
-            max-height: 130px;
-        }
-        
+      .accountDropdown:hover .accountDropdownMenu {
+        max-height: 130px;
+      }
     }
   }
 }
 
-.scrolled{
-    height: 50px; 
+.scrolled {
+  height: 50px;
 }
 
 img {
   width: 100%;
+}
+
+.hamburger,
+.sliderMenu{
+  display: none;
+}
+
+@media (max-width:600px) {
+  .hamburger {
+    padding: 15px 15px;
+    display: inline-block;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    background-color: transparent;
+    margin: 0;
+    overflow: visible;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    background-color: #000;
+    border-radius: 30px;
+    border: 5px #cf9e66 solid;
+    z-index: 150;
+    
+  }
+  
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after {
+    background-color: #fff;
+  }
+  
+  .hamburger-box {
+    width: 40px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+    
+  }
+  
+  .hamburger-inner {
+    display: block;
+    top: 50%;
+    margin-top: -2px;
+  }
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    width: 40px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 4px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+  }
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    content: '';
+    display: block;
+  }
+  .hamburger-inner::before {
+    top: -10px;
+  }
+  .hamburger-inner::after {
+    bottom: -10px;
+  }
+  
+  .hamburger--spin .hamburger-inner {
+    transition-duration: 0.22s;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  .hamburger--spin .hamburger-inner::before {
+    transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
+  }
+  .hamburger--spin .hamburger-inner::after {
+    transition: bottom 0.1s 0.25s ease-in,
+      transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  
+  .hamburger--spin.is-active .hamburger-inner {
+    transform: rotate(225deg);
+    transition-delay: 0.12s;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .hamburger--spin.is-active .hamburger-inner::before {
+    top: 0;
+    opacity: 0;
+    transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
+  }
+  .hamburger--spin.is-active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    transition: bottom 0.1s ease-out,
+      transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  
+  .sliderMenu{
+      position: fixed;
+      z-index: 100;
+      background-color: rgba(255, 255, 255, 0.911);
+      border-left: 5px #000 solid;
+      height: 100vh;
+      width: 70vw;
+      right: -72vw;
+      top: 0;
+      bottom: 0;
+      transition: right .5s ease;
+      display: block;
+  }
+  
+  .sliderMenu.open{
+      right: 0;
+  }
+  
+  .mobileLinks{
+      width: 100%;
+      list-style: none;
+  
+      li{
+          width: 100%;
+          text-align: center;
+          .navLinkMobile{
+              display: block;
+              width: 100%;
+              background-color: #fff;
+              text-decoration: none;
+              padding: 10px;
+              font-family: 'Nunito Sans', sans-serif;
+              font-size: 25px;
+          }
+          .navLinkMobile.active{
+              display: block;
+              width: 100%;
+              background-color: #000;
+              text-decoration: none;
+              padding: 10px;
+              font-family: 'Nunito Sans', sans-serif;
+              
+          }
+      }
+  }
+  
+  
+  .line{
+      border-top: 5px double #333;
+  }
+  
+  .accountMobile{
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      font-size: 25px;
+      background-color: #cf9e66;
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: bold;
+  }
 }

@@ -25,7 +25,7 @@ function Product() {
           productImage: product.photo,
           productName: product.fullname,
           productPrice: product.price,
-          productID: productID
+          productID: productID,
         },
         ammount: +ammountToAdd,
       });
@@ -164,35 +164,35 @@ function Product() {
         <div className={classes.productImages}>
           <div>
             <img
-            draggable="false"
+              draggable="false"
               src="https://a331998513.github.io/audiophile-ecommerce-website/static/media/image-gallery-1.fec85b48.jpg"
               alt=""
             />
           </div>
           <div>
             <img
-            draggable="false"
+              draggable="false"
               src="https://a331998513.github.io/audiophile-ecommerce-website/static/media/image-gallery-2.a88a2477.jpg"
               alt=""
             />
           </div>
           <div>
             <img
-            draggable="false"
+              draggable="false"
               src="https://a331998513.github.io/audiophile-ecommerce-website/static/media/image-gallery-3.431f9028.jpg"
               alt=""
             />
           </div>
           <div>
             <img
-            draggable="false"
+              draggable="false"
               src="https://c0.wallpaperflare.com/preview/251/57/262/adjusting-audio-black-and-white-close-up.jpg"
               alt=""
             />
           </div>
         </div>
       </Container>
-        <ProductsTypes/>
+      <ProductsTypes />
       <Brands />
     </>
   );

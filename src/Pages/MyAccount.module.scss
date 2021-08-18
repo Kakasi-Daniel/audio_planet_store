@@ -2,7 +2,10 @@
     font-family: 'Nunito Sans', sans-serif;
     margin-top: 120px;
     min-height: 70vh;
-
+   
+    @media (max-width:700px) {
+        text-align: center;
+      }
     .emailVerified{
         color: green;
         display: flex;
@@ -34,6 +37,11 @@
         cursor: pointer;
         transition: background-color .3s;
         margin: 20px;
+        @media (max-width:700px) {
+            width: 100%;
+            margin: 10px 0;
+            justify-content: space-evenly;
+          }
     }
 
     .sendEmailBtn:hover{
@@ -48,6 +56,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(500px,1fr));
     gap: 20px;
+    @media (max-width:700px) {
+        display: block;
+        text-align-last: left;
+      }
     
     .inputLabel{
         color: #814f16;
@@ -67,6 +79,9 @@
         border-radius: 10px;
         margin-top: 5px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.514);
+        @media (max-width:700px) {
+           margin-bottom: 20px;
+          }
     }
     
     .inputLabel input:focus{

@@ -18,7 +18,7 @@ function Order() {
               setOrder({...fetchedOrder})
           })
       }
-  }, [user])
+  }, [user,params.orderID])
 
   console.log(order)
 

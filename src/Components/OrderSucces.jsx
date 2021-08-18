@@ -13,8 +13,12 @@ function OrderSucces({orderID}) {
         const interval = setInterval(() =>{
             setSeconds(prev => prev-1)
         },1000)
+        return () => {
+            clearInterval(interval)
+        }
     },[])
 
+   
     if(seconds === 0){
         history.push('/');
     }

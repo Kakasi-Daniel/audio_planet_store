@@ -1,5 +1,4 @@
 import classes from './OrderDetails.module.scss';
-import { auth, database } from '../firebase';
 import Container from '../UI/Container';
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
@@ -14,7 +13,7 @@ import rand from 'random-key';
 import OrderSucces from '../Components/OrderSucces';
 import FlipMove from 'react-flip-move';
 
-function OrderDetails() {
+function OrderDetails({inputsError}) {
   const [{ user, basket, basketItems, basketTotal }, dispatchGlobal] =
     useContext(globalContext);
   const [payWithCard, setPayWithCard] = useState(true);
@@ -26,27 +25,49 @@ function OrderDetails() {
 
   const sendOrderHandler = (e) => {
     e.preventDefault();
-    setOrderSent(true);
-    let today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const yyyy = today.getFullYear();
-
-    today = mm + '/' + dd + '/' + yyyy;
-
-    if (user) {
-      sendOrder(basket, basketItems, basketTotal, today, inputs, orderID);
-    } else {
-      sendOrderNoAccount(
-        basket,
-        basketItems,
-        basketTotal,
-        today,
-        inputs,
-        orderID
-      );
+    
+    if(inputs.personal.name.trim().length < 6){
+      inputsError("Name should be at least 6 characters long!")
     }
-    dispatchGlobal({ type: 'DELETE_BASKET' });
+    else if(inputs.personal.phone.trim().length < 10){
+      inputsError("Phone number is badly formated.")
+    }
+    else if(inputs.details.county.trim().length < 3){
+      inputsError("Invalid County!")
+    }
+    else if(inputs.details.city.trim().length < 3){
+      inputsError("Invalid City!")
+    }
+    else if(inputs.details.address.trim().length < 10){
+      inputsError("Invalid address!")
+    }
+    else if(inputs.details.postal.trim().length < 6){
+      inputsError("Invalid postal code!")
+    }
+    else{
+      setOrderSent(true);
+      let today = new Date();
+      const dd = String(today.getDate()).padStart(2, '0');
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const yyyy = today.getFullYear();
+  
+      today = mm + '/' + dd + '/' + yyyy;
+  
+      if (user) {
+        sendOrder(basket, basketItems, basketTotal, today, inputs, orderID);
+      } else {
+        sendOrderNoAccount(
+          basket,
+          basketItems,
+          basketTotal,
+          today,
+          inputs,
+          orderID
+        );
+      }
+      dispatchGlobal({ type: 'DELETE_BASKET' });
+    }
+
   };
 
   const methodChangeHandler = (e) => {
@@ -151,7 +172,7 @@ function OrderDetails() {
                 value={inputs.personal.phone}
                 placeholder="07xxxxxxxx"
                 id="phone"
-                type="tel"
+                type="number"
               />
             </label>
             <label className={classes.inputLabel} htmlFor="county">
@@ -191,7 +212,7 @@ function OrderDetails() {
                 value={inputs.details.postal}
                 placeholder="407035"
                 id="postal"
-                type="postal"
+                type="number"
               />
             </label>
             <button

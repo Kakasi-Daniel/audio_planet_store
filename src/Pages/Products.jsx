@@ -3,7 +3,6 @@ import Container from '../UI/Container';
 import { useState, useEffect, useRef } from 'react';
 import Product from '../Components/ProductBox';
 import { getArrayProducts } from '../http';
-import arrayShuffle from 'array-shuffle';
 import loadingGif from '../assets/loading.gif';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -16,6 +15,15 @@ function Products() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
   const [priceAscending, setPriceAscending] = useState(true);
+  const [filterPage,setFilterPage] = useState(false)
+
+  const openFiltersHandler = () =>{
+    if(filterPage){
+      setFilterPage(false)
+    }else{
+      setFilterPage('open')
+    }
+  }
 
 
   const typeRef = useRef();
@@ -36,6 +44,7 @@ function Products() {
   };
 
   const getParameterByName = (name, url = window.location.href) => {
+    // eslint-disable-next-line
     name = name.replace(/[\[\]]/g, '\\$&');
     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
       results = regex.exec(url);
@@ -157,7 +166,7 @@ function Products() {
 
   return (
     <Container className={classes.productsPage}>
-      <aside className={classes.sidebar}>
+      <aside className={classes.sidebar + ` ${filterPage ? classes[filterPage] : null}`}>
         <div
           className={
             accordions.types
@@ -257,6 +266,7 @@ function Products() {
             </div>
           </div>
         </div>
+        <button  onClick={openFiltersHandler} className={classes.seeFilteredProductsBtn} >See filtered products</button>
       </aside>
       <div className={classes.prodContent}>
 
@@ -286,7 +296,7 @@ function Products() {
               Price{' '}
               {priceAscending ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
             </button> }
-          
+          <button onClick={openFiltersHandler} className={classes.seeFilteredProductsBtn} >See more filters</button>
         </div>
         <section className={classes.productsList}>
           {loading && (

@@ -26,6 +26,7 @@ function App() {
   const [username,setUsername] = useState(user?.displayName)
   const [showUpdate,setShowUpdate] = useState(false)
   const [errorLogin,setErrorLogin] = useState(false)
+  const [inputsError,setInputsError] = useState(false)
 
   const onUsernameChangedHandler = (newUsername,show=false) =>{
     setUsername(newUsername);
@@ -37,6 +38,7 @@ function App() {
     }
   }
 
+
   const loginFailedHandler = err =>{
     if(err){
       setErrorLogin(err.message)
@@ -44,6 +46,15 @@ function App() {
         setErrorLogin(false)
       },4000)
     }
+  }
+
+  const inputsErrorHandler = error =>{
+    
+      setInputsError(error)
+      setTimeout(()=>{
+        setInputsError(false)
+      },4000)
+    
   }
 
   useEffect(() => {
@@ -62,12 +73,13 @@ function App() {
       dispatchGlobal({type:"SET_FROM_LOCAL", store:fromLocal})
     }
     
-  }, []);
+  }, [dispatchGlobal]);
 
   return (
     <> 
     {showUpdate && <UserDetailsUpdate text="User details succesfully updated" color="green" />}
     {errorLogin && <UserDetailsUpdate text={errorLogin} color="red" />}
+    {inputsError && <UserDetailsUpdate text={inputsError} color="red" />}
       <Router>
         <ScrollToTop />
         <Header user={username}/>
@@ -93,13 +105,13 @@ function App() {
           <Route path="/myaccount">
             <MyAccount onUsernameChanged={onUsernameChangedHandler} />
           </Route>
-          <Route path="/myorders">
+          <Route path="/myorders" exact>
             <MyOrders/>
           </Route>
           <Route path="/placeorder">
-            <OrderDetails/>
+            <OrderDetails inputsError={inputsErrorHandler} />
           </Route>
-          <Route path="/orders/:orderID">
+          <Route path="/myorders/:orderID">
             <Order/>
           </Route>
         </Switch>

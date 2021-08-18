@@ -3,6 +3,10 @@
     justify-content: space-between;
     align-items: center;
     font-family: 'Nunito Sans', sans-serif;
+    @media (max-width:700px) {
+       display: block;
+       margin-bottom: 20px;
+    }
 }
 
 .productDescription{
@@ -14,6 +18,9 @@
 
 .productText{
     width: 400px;
+    @media (max-width:700px) {
+        width: fit-content;
+    }
     h3{
         line-height: 1;
         margin-bottom: 10px;
@@ -34,6 +41,9 @@
 .controls{
     display: flex;
     justify-content: space-between;
+    @media (max-width:700px) {
+        justify-content: space-evenly;
+    }
 }
 
 .ammountControls{

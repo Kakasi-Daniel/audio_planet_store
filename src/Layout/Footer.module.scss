@@ -12,6 +12,11 @@
     display: flex;
     align-items: center;
     // justify-content: space-between;
+    @media (max-width:600px) {
+        display: block;
+        padding: 30px 0;
+        text-align: center;
+        }
 }
 
 .logo{
@@ -22,6 +27,9 @@
 
 .footerSections > *{
     flex: 1;
+    @media (max-width:600px) {
+    display: block;
+    }
 }
 
 .right{
@@ -31,6 +39,9 @@
 
 .social{
     width: fit-content;
+    @media (max-width:600px) {
+        margin: auto;
+        }
 }
 
 .social a{

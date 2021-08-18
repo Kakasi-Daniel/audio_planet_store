@@ -1,5 +1,5 @@
 import classes from './MyAccount.module.scss';
-import { auth,database } from '../firebase';
+import { auth } from '../firebase';
 import Container from '../UI/Container';
 import { useState,useEffect } from 'react';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
@@ -16,7 +16,7 @@ function MyAccount({onUsernameChanged}) {
     auth.currentUser.sendEmailVerification();
     setEmailSent(true);
   };
-  const [{user},dispatch] = useContext(globalContext)
+  const [{user}] = useContext(globalContext)
 
   const history = useHistory()
 
@@ -35,6 +35,7 @@ function MyAccount({onUsernameChanged}) {
 
   useEffect(() => {
     
+
 
     if(user){
         getUserDetailsByID(user.uid).then(data =>{
@@ -62,7 +63,10 @@ function MyAccount({onUsernameChanged}) {
   const onSubmitHandler = (e) => {
       e.preventDefault()
 
-    auth.currentUser.updateProfile({
+    
+    
+    
+      auth.currentUser.updateProfile({
         displayName: inputs.personal.name,
       }).then(() => {
         onUsernameChanged(inputs.personal.name,true)
@@ -73,6 +77,8 @@ function MyAccount({onUsernameChanged}) {
       sendUserDetails(inputs.personal.phone,inputs.details.county,inputs.details.city,inputs.details.address,inputs.details.postal)
 
       history.push('/')
+    
+
   }
 
   const onInputChangeGenerator = (type,field) => {
@@ -100,11 +106,11 @@ function MyAccount({onUsernameChanged}) {
         <h2>Here you can change your account details for future orders</h2>
         <div className={classes.emailVerification}>
           {auth.currentUser?.emailVerified ? (
-            <h2 className={classes.emailVerified}>You email is verified! &nbsp; <VerifiedUserIcon/></h2>
+            <h2 className={classes.emailVerified}>You email: {auth.currentUser?.email} is verified! &nbsp; <VerifiedUserIcon/></h2>
           ) : (
             <div className={classes.sendEmail}>
               <h2 className={classes.emailNotVerified}>
-                Your email is not verified!
+                Your email: {auth.currentUser?.email} is not verified!
               </h2>
               {!emailSent ? (
                 <button className={classes.sendEmailBtn} onClick={sendVerificationEmail}>
@@ -135,7 +141,7 @@ function MyAccount({onUsernameChanged}) {
                     onChange={onInputChangeGenerator("personal","phone")}
                     value={inputs.personal.phone}
                     placeholder="07xxxxxxxx"
-                    id="phone" type="tel" />
+                    id="phone" type="number" />
                 </label>
                 <label  className={classes.inputLabel} htmlFor="county">
                     County
@@ -167,7 +173,7 @@ function MyAccount({onUsernameChanged}) {
                     onChange={onInputChangeGenerator("details","postal")}
                     value={inputs.details.postal}
                     placeholder="407035"
-                    id="postal" type="postal" />
+                    id="postal" type="number" />
                 </label>
                 <button  className={classes.submitBtn} type="submit" >Save account details</button>
         </form>

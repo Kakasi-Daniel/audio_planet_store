@@ -8,6 +8,35 @@
 
     .sidebar{
         width: 200px;
+        .seeFilteredProductsBtn{
+            display: none;
+        }
+        
+        @media (max-width:600px) {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            z-index: 100;
+            background-color: #fff;
+            width: 100vw;
+            height: 100vh;
+            padding: 50px 10px;
+            display: none;
+            .seeFilteredProductsBtn{
+                display: block;
+                width: 100%;
+                padding: 20px;
+                background-color: #000;
+                border: none;
+                color: #fff;
+                font-size: 18px;
+                font-family: 'Nunito Sans', sans-serif;
+                border-radius: 20px;
+            }
+            
+            }
         .filterSection{
             margin-bottom: 30px;
             background-color: rgb(224, 221, 221);
@@ -103,6 +132,9 @@
                 border: 2px #000000 solid;
                 border-radius: 20px;
                 box-shadow: 0 0 8px rgba(0, 0, 0, 0.479);
+                @media (max-width:600px) {
+                    padding: 10px;
+                }
             }
 
             input:focus{
@@ -169,6 +201,10 @@
         font-family: 'Nunito Sans', sans-serif;
         justify-content: space-between;
         transition: box-shadow .3s ease;
+        @media (max-width:600px) {
+            justify-content: space-evenly;
+            font-size: 18px;
+        }
     }
     .priceOrderBtn:hover{
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -180,5 +216,54 @@
             width: fit-content;
             margin: auto;
             text-align: center;
+        }
+    }
+
+    .seeFilteredProductsBtn{
+        display: none;
+    }
+
+    
+
+    @media (max-width:600px) {
+
+        .sidebar.open{
+            display: block;
+        }
+
+        .filters{
+            display: block;
+            width: 100%;
+
+            & >*{
+                width: 100%;
+                margin: 10px auto;
+            }
+
+            .pagination{
+                width: fit-content;
+                margin: auto;
+            }
+        }
+
+        
+
+        .seeFilteredProductsBtn{
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #000;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-family: 'Nunito Sans', sans-serif;
+            border-radius: 20px;
+        }
+
+        .prodContent{
+            width: 100%;
+        }
+        .productsList{
+            margin: 0;
         }
     }

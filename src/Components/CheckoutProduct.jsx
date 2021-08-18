@@ -1,12 +1,9 @@
 import classes from './CheckoutProduct.module.scss';
-import {useState} from 'react'
 import DeleteIcon from '@material-ui/icons/Delete';
 import {Link} from 'react-router-dom'
 import { forwardRef } from 'react';
 
 const CheckoutProduct = forwardRef((props,ref) => {
-
-    const [ammount, setAmmount] = useState(props.ammount)
 
     const addToBasketOne = () =>{
         const productToAdd = {productID: props.id};

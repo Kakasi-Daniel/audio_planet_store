@@ -32,7 +32,8 @@ function Signup({onUsernameChanged,signUpFailed}) {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    auth.createUserWithEmailAndPassword(inputs.email, inputs.password)
+    if(inputs.username.trim().length > 5){
+      auth.createUserWithEmailAndPassword(inputs.email, inputs.password)
       .then((userCredential) => {
         auth.currentUser.updateProfile({
             displayName: inputs.username,
@@ -48,6 +49,9 @@ function Signup({onUsernameChanged,signUpFailed}) {
       .catch((error) => {
         signUpFailed(error)
       });
+    }else{
+      signUpFailed({message:"Username should be at least 6 charachters long!"})
+    }
   };
 
   return (
