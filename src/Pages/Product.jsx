@@ -34,7 +34,7 @@ function Product() {
 
   const inputChangeHandler = (e) => {
     if (e.target.value > 0 || e.target.value === '') {
-      setAmmount(e.target.value);
+      setAmmount(Math.floor(+e.target.value));
     }
     if (e.target.value < 1 || e.target.value === '') {
       setAmmountError(true);
