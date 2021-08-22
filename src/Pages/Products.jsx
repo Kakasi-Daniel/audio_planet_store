@@ -16,6 +16,7 @@ function Products() {
   const [page, setPage] = useState(0);
   const [priceAscending, setPriceAscending] = useState(true);
   const [filterPage,setFilterPage] = useState(false)
+  const [url,] = useState(new URL(window.location.href))
 
   const openFiltersHandler = () =>{
     if(filterPage){
@@ -24,7 +25,6 @@ function Products() {
       setFilterPage('open')
     }
   }
-
 
   const typeRef = useRef();
   const brandRef = useRef();
@@ -43,31 +43,27 @@ function Products() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const getParameterByName = (name, url = window.location.href) => {
-    // eslint-disable-next-line
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-      results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-  };
+  
 
   useEffect(() => {
     getArrayProducts().then((products) => {
       setfetchedProducts(products);
       setLoading(false);
     });
-    const brand = getParameterByName('brand');
-    const type = getParameterByName('type');
+    
+    const brand = url.searchParams.get('brand')
+    const type = url.searchParams.get('type')
+
+    
 
     if (brand) {
-      brandRef.current.click();
+      brandRef.current?.click();
+      
     }
     if (type) {
-      typeRef.current.click();
+      typeRef.current?.click();
     }
-  }, []);
+  }, [url]);
 
   let DISPLAYED_PRODUCTS =
     fetchedProducts.length === 0 ? [] : [...fetchedProducts];
@@ -181,7 +177,7 @@ function Products() {
             <div className={classes.filterOption}>
               <input
                 ref={
-                  getParameterByName('type') === 'headphones' ? typeRef : null
+                  url.searchParams.get('type') === 'headphones' ? typeRef : null
                 }
                 value="headphones"
                 onChange={filter('types')}
@@ -192,7 +188,7 @@ function Products() {
             </div>
             <div className={classes.filterOption}>
               <input
-                ref={getParameterByName('type') === 'speakers' ? typeRef : null}
+                ref={url.searchParams.get('type') === 'speakers' ? typeRef : null}
                 value="speakers"
                 onChange={filter('types')}
                 type="checkbox"
@@ -202,7 +198,7 @@ function Products() {
             </div>
             <div className={classes.filterOption}>
               <input
-                ref={getParameterByName('type') === 'amps' ? typeRef : null}
+                ref={url.searchParams.get('type') === 'amps' ? typeRef : null}
                 value="amps"
                 onChange={filter('types')}
                 type="checkbox"
@@ -225,7 +221,7 @@ function Products() {
           <div className={classes.filterContent}>
             <div className={classes.filterOption}>
               <input
-                ref={getParameterByName('brand') === 'jbl' ? brandRef : null}
+                ref={url.searchParams.get('brand') === 'jbl' ? brandRef : null}
                 value="jbl"
                 onChange={filter('brands')}
                 type="checkbox"
@@ -246,7 +242,7 @@ function Products() {
             </div>
             <div className={classes.filterOption}>
               <input
-                ref={getParameterByName('brand') === 'sony' ? brandRef : null}
+                ref={url.searchParams.get('brand') === 'sony' ? brandRef : null}
                 value="sony"
                 onChange={filter('brands')}
                 type="checkbox"
@@ -256,7 +252,7 @@ function Products() {
             </div>
             <div className={classes.filterOption}>
               <input
-                ref={getParameterByName('brand') === 'akai' ? brandRef : null}
+                ref={url.searchParams.get('brand') === 'akai' ? brandRef : null}
                 value="akai"
                 onChange={filter('brands')}
                 type="checkbox"
