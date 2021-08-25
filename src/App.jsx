@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import UserDetailsUpdate from './Components/UserDetailsUpdate';
 import { auth } from './firebase';
 import { useContext, useEffect, useState, lazy, Suspense } from 'react';
@@ -20,8 +25,6 @@ const MyAccount = lazy(() => import('./Pages/MyAccount'));
 const MyOrders = lazy(() => import('./Pages/MyOrders'));
 const Order = lazy(() => import('./Pages/Order'));
 const OrderDetails = lazy(() => import('./Pages/OrderDetails'));
-
-
 
 function App() {
   const [{ user }, dispatchGlobal] = useContext(UserContext);
@@ -99,15 +102,7 @@ function App() {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/login">
-              <Login loginFailed={loginFailedHandler} />
-            </Route>
-            <Route path="/signup">
-              <Signup
-                signUpFailed={loginFailedHandler}
-                onUsernameChanged={onUsernameChangedHandler}
-              />
-            </Route>
+
             <Route path="/products" exact>
               <Products />
             </Route>
@@ -117,17 +112,36 @@ function App() {
             <Route path="/checkout">
               <Checkout />
             </Route>
-            <Route path="/myaccount">
-              <MyAccount onUsernameChanged={onUsernameChangedHandler} />
-            </Route>
-            <Route path="/myorders" exact>
-              <MyOrders />
-            </Route>
+
             <Route path="/placeorder">
               <OrderDetails inputsError={inputsErrorHandler} />
             </Route>
-            <Route path="/myorders/:orderID">
+
+           {!user && <Route path="/login">
+              <Login loginFailed={loginFailedHandler} />
+            </Route>}
+
+            {!user && <Route path="/signup">
+              <Signup
+                signUpFailed={loginFailedHandler}
+                onUsernameChanged={onUsernameChangedHandler}
+              />
+            </Route>}
+
+            {user && <Route path="/myaccount">
+              <MyAccount onUsernameChanged={onUsernameChangedHandler} />
+            </Route>}
+
+           {user &&  <Route path="/myorders" exact>
+              <MyOrders />
+            </Route>}
+
+            {user && <Route path="/myorders/:orderID">
               <Order />
+            </Route>}
+
+            <Route path="*">
+              <Redirect to="/" />
             </Route>
           </Switch>
         </Suspense>

@@ -27,7 +27,7 @@ function Login({loginFailed}) {
         auth.signInWithEmailAndPassword(inputs.email, inputs.password)
   .then((userCredential) => {
     console.log('login succes')
-    history.push('/')
+    history.replace('/')
   })
   .catch((error) => {
     loginFailed(error)

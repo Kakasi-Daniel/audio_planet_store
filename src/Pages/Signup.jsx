@@ -40,7 +40,7 @@ function Signup({onUsernameChanged,signUpFailed}) {
           }).then(() => {
             dispatch({type:'SET_USER',user: auth.currentUser})
             onUsernameChanged(inputs.username)
-            history.push('/myaccount')
+            history.replace('/myaccount')
           }).catch((error) => {
             console.log('username change error')
           });  

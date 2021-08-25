@@ -68,7 +68,7 @@ function Header({ user }) {
               <li>
                 <button
                   onClick={() => {
-                    history.push('/');
+                    history.replace('/');
                     auth.signOut();
                   }}
                   className={classes.navLinkMobile}
@@ -187,7 +187,7 @@ function Header({ user }) {
                   <li>
                     <button
                       onClick={() => {
-                        history.push('/');
+                        history.replace('/');
                         auth.signOut();
                       }}
                       className={classes.logout}

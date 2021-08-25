@@ -1,16 +1,15 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#root{
-    margin-top: 100px;
+#root {
+  margin-top: 100px;
 }
 
-
-body{
-    background-color: #ebebeb;
+body {
+  background-color: #ebebeb;
 }
 
 input::-webkit-outer-spin-button,
@@ -19,20 +18,17 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
-.centeredSpinner{
+.centeredSpinner {
   width: 100vw;
 
-  img{
+  img {
     display: block;
     width: 100px;
     height: 100px;
     margin: 150px auto;
   }
 }
-
-
